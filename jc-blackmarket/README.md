@@ -19,8 +19,7 @@ This is an updated and redesigned version of the original `jc-blackmarketv2` scr
 - 🐕 **Custom Pets for Each Market** — Make your markets stand out with NPC companions  
 - 🚫 **Optional Buy/Sell Limits** — Easily toggle limits in configuration  
 - 🎨 **Complete UI Overhaul** — Modern, immersive, western-themed interface  
-- 🧩 **Modular Design** — Easy to extend and maintain  
-
+- 🧩 **Modular Design** — Easy to extend and maintain
 ---
 
 ## 🛠 Sample Item Config
