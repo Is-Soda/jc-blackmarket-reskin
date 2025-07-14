@@ -130,8 +130,8 @@ Citizen.CreateThread(function()
         FreezeEntityPosition(blackmarket, true)
         table.insert(spawnedPeds, blackmarket)
 
-        -- Spawn pets/companions if defined
-        if v.pets then
+        -- Spawn pets/companions if defined and enabled
+        if Config.PetsEnabled and v.pets then
             for _, pet in ipairs(v.pets) do
                 RequestModel(pet.model)
                 while not HasModelLoaded(pet.model) do

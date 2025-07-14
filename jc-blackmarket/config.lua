@@ -1,5 +1,6 @@
 Config = Config or {}
 
+Config.PetsEnabled = true -- Set to false to disable pets/companions globally
 Config.Inventory = 'rsg-inventory' -- Only used for image purposes
 Config.Locations = {
     ['blackmarket1'] = { -- Unique ID of the blackmarket, must be unique!
