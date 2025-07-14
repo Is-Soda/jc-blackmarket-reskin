@@ -1,4 +1,4 @@
-# JC Blackmarket V2 — UI Overhaul Edition by IsSoda
+# JC Blackmarket V2 — UI Overhaul by IsSoda
 
 A fully revamped and modernized blackmarket system for **RedM** using the **RSGCore Framework**.
 
