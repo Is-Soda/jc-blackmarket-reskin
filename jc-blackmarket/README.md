@@ -23,22 +23,6 @@ This is an updated and redesigned version of the original `jc-blackmarketv2` scr
 
 ---
 
-## 🖼️ UI Preview
-
-### 📍 Market Shop (Buy)
-![blackmarket.png](./blackmarket.png)
-
-### 💰 Sell Interface
-![bm2.png](./bm2.png)
-
-### 🛒 Sell Prompt (Goldbar)
-![bm3.png](./bm3.png)
-
-### 🔫 Purchase Prompt (Doublebarrel)
-![bm4.png](./bm4.png)
-
----
-
 ## 🛠 Sample Item Config
 
 ```
