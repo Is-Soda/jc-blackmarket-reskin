@@ -4,7 +4,7 @@ rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aw
 
 author 'IsSoda'
 description 'JC Blackmarket V2 — UI Overhaul Edition by IsSoda'
-version '2.0.0'
+version '2.0.1'
 
 ui_page 'html/index.html'
 

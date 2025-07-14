@@ -6,6 +6,9 @@ Config.Locations = {
         label = 'Blackmarket 1', -- The name of the blackmarket can be anything
         ped = 'amsp_robsdgunsmith_males_01', -- The model of the Blackmarket ped
         coords = vec4(-318.40, 819.43, 118.69, 11.82), -- The location of the ped, HAS TO BE VECTOR4
+        pets = {
+            { model = 'a_c_dogcatahoulacur_01', offset = vec3(2.0, 0.0, 0.0) },
+        },
         sellItems = { -- Leave as an empty table if you don't want it to sell anything!
             {
                 label = 'Crossover Navy Revolver', -- Simply a label for the item, can be anything.

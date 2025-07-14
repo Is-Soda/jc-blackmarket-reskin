@@ -9,6 +9,9 @@ local function GetPlayerMoney()
     }
 end
 
+-- Table to track all spawned peds for cleanup
+local spawnedPeds = {}
+
 Citizen.CreateThread(function()
     RegisterNUICallback('getItems', function(data, cb)
         cb(Config.Locations[data.blackmarket].sellItems)
@@ -125,6 +128,38 @@ Citizen.CreateThread(function()
         SetEntityInvincible(blackmarket, true)
         SetBlockingOfNonTemporaryEvents(blackmarket, true)
         FreezeEntityPosition(blackmarket, true)
+        table.insert(spawnedPeds, blackmarket)
+
+        -- Spawn pets/companions if defined
+        if v.pets then
+            for _, pet in ipairs(v.pets) do
+                RequestModel(pet.model)
+                while not HasModelLoaded(pet.model) do
+                    Wait(0)
+                end
+                local petCoords = vec3(coords.x, coords.y, coords.z) + (pet.offset or vec3(1.0, 0.0, 0.0))
+                local companion = CreatePed(pet.model, petCoords.x, petCoords.y, petCoords.z - 1.0, coords.w, false, false)
+                Citizen.InvokeNative(0x283978A15512B2FE, companion, true)
+                SetEntityInvincible(companion, true)
+                SetBlockingOfNonTemporaryEvents(companion, true)
+                FreezeEntityPosition(companion, false) -- Allow movement
+                table.insert(spawnedPeds, companion)
+
+                -- Randomize behavior: sit, idle, or wander
+                local behavior = math.random(1, 3)
+                
+                if behavior == 2 then
+                    -- Sit
+                    TaskStartScenarioInPlace(companion, "WORLD_ANIMAL_DOG_SITTING", 0, true)
+                elseif behavior == 2 then
+                    -- Idle
+                    TaskStartScenarioInPlace(companion, "WORLD_ANIMAL_DOG_IDLE", 0, true)
+                else
+                    -- Wander in a 5m radius around the market NPC
+                    TaskWanderInArea(companion, coords.x, coords.y, coords.z, 5.0, 0.0, 0.0)
+                end
+            end
+        end
 
         exports['ox_target']:addSphereZone({
             name = v.label,
@@ -155,5 +190,15 @@ Citizen.CreateThread(function()
                 }
             }
         })
+    end
+end)
+
+-- Cleanup all spawned peds on resource stop
+AddEventHandler('onResourceStop', function(resourceName)
+    if GetCurrentResourceName() ~= resourceName then return end
+    for _, ped in ipairs(spawnedPeds) do
+        if DoesEntityExist(ped) then
+            DeleteEntity(ped)
+        end
     end
 end)
