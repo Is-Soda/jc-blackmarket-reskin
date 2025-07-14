@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackmarket Shop</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blackmarket-container" id="blackmarket-ui">
+        <!-- Background overlay -->
+        <div class="background-overlay"></div>
+        
+        <!-- Close button -->
+        <button class="close-btn" id="closeBtn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title" id="blackmarketTitle">Blackmarket Shop</h1>
+            <p class="subtitle">Trade with caution, partner</p>
+        </div>
+
+        <!-- Money display -->
+        <div class="money-display" id="moneyDisplay">
+            <div class="money-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+                <span>Blood Money: $<span id="bloodMoney">0</span></span>
+            </div>
+            <div class="money-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                    <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+                <span>Cash: $<span id="cashMoney">0</span></span>
+            </div>
+        </div>
+
+        <!-- Navigation tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" id="buyTab" data-tab="buy">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5M17 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0zM9 17a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/>
+                </svg>
+                Buy
+            </button>
+            <button class="tab-btn" id="sellTab" data-tab="sell">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+                Sell
+            </button>
+        </div>
+
+        <!-- Items container -->
+        <div class="items-container">
+            <div class="items-grid" id="itemsGrid">
+                <!-- Items will be populated here -->
+            </div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading items...</p>
+        </div>
+
+        <!-- Empty state -->
+        <div class="empty-state" id="emptyState">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+            <p>No items available</p>
+        </div>
+    </div>
+
+    <!-- Quantity Modal -->
+    <div class="modal-overlay" id="quantityModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Select Quantity</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="item-preview">
+                    <img id="modalItemImage" src="/placeholder.svg" alt="Item">
+                    <div class="item-info">
+                        <h4 id="modalItemName">Item Name</h4>
+                        <p id="modalItemPrice">$0</p>
+                        <p id="modalItemStock">Stock: 0</p>
+                    </div>
+                </div>
+
+                <div class="quantity-input-group">
+                    <label for="quantityInput">Quantity:</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" id="decreaseBtn">-</button>
+                        <input type="number" id="quantityInput" min="1" value="1">
+                        <button class="quantity-btn" id="increaseBtn">+</button>
+                    </div>
+                </div>
+
+                <div class="total-price">
+                    <span>Total: $<span id="totalPrice">0</span></span>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                <button class="btn btn-primary" id="confirmBtn">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
