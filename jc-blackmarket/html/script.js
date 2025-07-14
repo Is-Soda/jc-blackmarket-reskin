@@ -102,14 +102,11 @@ function openBlackmarket(data) {
   if (data.playerMoney) {
     playerMoney = data.playerMoney
     updateMoneyDisplay()
-    console.log("Player Money:", playerMoney) // Debug log
   }
 
   // Get inventory config
   $.post("https://jc-blackmarket/getInventory", JSON.stringify(), (result) => {
     Config.inventory = result
-  }).fail(() => {
-    console.log("Failed to get inventory config")
   })
 
   // Show/hide tabs based on permissions
@@ -136,7 +133,6 @@ function openBlackmarket(data) {
 }
 
 function updateMoneyDisplay() {
-  console.log("Updating money display:", playerMoney) // Debug log
   $("#bloodMoney").text(playerMoney.bloodmoney ? playerMoney.bloodmoney.toLocaleString() : "0")
   $("#cashMoney").text(playerMoney.cash ? playerMoney.cash.toLocaleString() : "0")
 }
@@ -145,9 +141,6 @@ function refreshPlayerMoney() {
   $.post("https://jc-blackmarket/getPlayerMoney", JSON.stringify(), (money) => {
     playerMoney = money
     updateMoneyDisplay()
-    console.log("Refreshed money:", money) // Debug log
-  }).fail(() => {
-    console.log("Failed to get player money")
   })
 }
 
@@ -163,9 +156,7 @@ function hideInterface() {
 function closeInterface() {
   hideInterface()
 
-  $.post("https://jc-blackmarket/close", JSON.stringify()).fail(() => {
-    console.log("Failed to send close event")
-  })
+  $.post("https://jc-blackmarket/close", JSON.stringify())
 }
 
 function switchTab(tab) {
@@ -197,11 +188,9 @@ function loadItems() {
     }),
     (data) => {
       items = data || []
-      console.log("Loaded items:", items) // Debug log
       renderItems()
     },
   ).fail(() => {
-    console.log("Failed to load items")
     hideLoading()
     showEmptyState()
   })
@@ -363,9 +352,7 @@ function confirmTransaction() {
         loadItems()
       }, 500)
     },
-  ).fail(() => {
-    console.log("Transaction failed")
-  })
+  )
 }
 
 function showLoading() {
